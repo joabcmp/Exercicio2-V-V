@@ -52,8 +52,8 @@ class ProcessadorTest {
         // Contas: 700,00 (05/02/2023 - válido) e 800,00 (17/02/2023 - válido)
         Fatura f = new Fatura("20/02/2023", 1500, "Joab Cesar M");
         Processador p = new Processador(f);
-        Pagamento pag1 = new Pagamento(700, "05/02/2023");
-        Pagamento pag2 = new Pagamento(800, "17/02/2023");
+        Pagamento pag1 = new Pagamento(700, "28/03/2024");
+        Pagamento pag2 = new Pagamento(800, "28/03/2024");
         ArrayList<Pagamento> pagamentos = new ArrayList<>();
         pagamentos.add(pag1);
         pagamentos.add(pag2);

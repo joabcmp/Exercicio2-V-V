@@ -13,11 +13,11 @@ class PagamentoTest {
         try {
             Pagamento pag = new Pagamento(856, "28/03/2024");
             assertEquals(856, pag.getValorPago());
-            assertEquals("28/03/2024", pag.getDataPagamento());
+            assertEquals("28/03/2024", pag.getData());
         } catch (IllegalArgumentException e) {
             fail("Não deveria lançar exceção para pagamento válido.");
         }
-    }
+    }  
 
     @Test
     public void testCriarPagamentoInvalidoComValorNegativo() {
@@ -58,7 +58,7 @@ class PagamentoTest {
         try {
             Pagamento pag = new Pagamento(856, "01/01/2022");
             assertEquals(856, pag.getValorPago());
-            assertEquals("01/01/2023", pag.getDataPagamento());
+            assertEquals("01/01/2023", pag.getData());
         } catch (IllegalArgumentException e) {
             fail("Não deveria lançar exceção para data no passado.");
         }
