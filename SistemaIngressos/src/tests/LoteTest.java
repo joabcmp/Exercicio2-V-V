@@ -154,6 +154,21 @@ class LoteTest {
 	}
 	
 	@Test
+	void testNumIngressosVendidosIncializaZero() {
+		int respostaEsperada = 0;
+		int numIngressos = 10;
+		double porcentagemVIP = 0.2;
+		double desconto = 0.1;
+		int precoBase = 10;
+		
+		Lote lote = new Lote(numIngressos, desconto, porcentagemVIP, precoBase);
+		int numIngressosVendidos = lote.GetNumIngressosNormalVendidos() + 
+				lote.GetNumIngressosVipVendidos() + 
+				lote.GetNumIngressosMeiaVendidos();
+		assertEquals(respostaEsperada, numIngressosVendidos);
+	}
+	
+	@Test
 	void testGetNumIngressosNormalVendidos() {
 		int respostaEsperada = 7;
 		int numIngressos = 10;
