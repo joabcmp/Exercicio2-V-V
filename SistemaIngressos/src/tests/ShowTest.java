@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import sistema.Show;
+
 class ShowTest {
 
 	@Test
@@ -114,9 +116,9 @@ class ShowTest {
 				+ "Relatorio do show:\n"
 				+ "Numero de ingressos normais vendidos: 350\n"
 				+ "Numero de ingressos VIPs vendidos: 100\n"
-				+ "Numero dei ngressos meia entrada vendidos: 50\n"
-				+ "Receita liquida do show: 4950\n"
-				+ "Custos do show: 3300\n"
+				+ "Numero de ingressos meia entrada vendidos: 50\n"
+				+ "Receita liquida do show: 1625,00\n"
+				+ "Custos do show: 3300,00\n"
 				+ "Status financeiro do show: LUCRO";
 		
 		assertEquals(respostaEsperada, show.gerarRelatorio());
