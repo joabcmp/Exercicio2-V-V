@@ -33,6 +33,10 @@ public class Ingresso {
     public Status getStatus() {
         return this.status;
     }
+    
+    public TipoIngresso getTipo() {
+        return this.tipo;
+    }
 
     public void setStatus(Status status) {
         if (this.status == Status.VENDIDO) {
@@ -40,5 +44,35 @@ public class Ingresso {
         }
         this.status = status;
     }
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(preco);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Ingresso other = (Ingresso) obj;
+		if (Double.doubleToLongBits(preco) != Double.doubleToLongBits(other.preco))
+			return false;
+		if (status != other.status)
+			return false;
+		if (tipo != other.tipo)
+			return false;
+		return true;
+	}
 }
 
