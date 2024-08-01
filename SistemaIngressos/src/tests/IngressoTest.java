@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import sistema.Ingresso;
+import sistema.Status;
+import sistema.TipoIngresso;
+
 class IngressoTest {
 
 	@Test
@@ -20,7 +24,7 @@ class IngressoTest {
 	void testGetPrecoIngressoNORMAL() {
 		double  precoBase = 10;
 		double  precoEsperado = 10;
-		Ingresso ingresso = new Ingresso(precoBase, Status.NORMAL);
+		Ingresso ingresso = new Ingresso(precoBase, TipoIngresso.NORMAL);
 		assertEquals(precoEsperado, ingresso.getPreco());
 	}
 
@@ -28,7 +32,7 @@ class IngressoTest {
 	void testGetPrecoIngressoVIP() {
 		double  precoBase = 10;
 		double  precoEsperado = 20;
-		Ingresso ingresso = new Ingresso(precoBase, Status.VIP);
+		Ingresso ingresso = new Ingresso(precoBase, TipoIngresso.VIP);
 		assertEquals(precoEsperado, ingresso.getPreco());
 	}
 	
@@ -36,14 +40,14 @@ class IngressoTest {
 	void testGetPrecoIngressoMEIA_ENTRADA() {
 		double  precoBase = 10;
 		double  precoEsperado = 5;
-		Ingresso ingresso = new Ingresso(precoBase, Status.MEIA_ENTRADA);
+		Ingresso ingresso = new Ingresso(precoBase, TipoIngresso.MEIA_ENTRADA);
 		assertEquals(precoEsperado, ingresso.getPreco());
 	}
 	
 	@Test
 	void testIngressoInicializaNAO_VENDIDO() {
 		Status statusEsperado = Status.NAO_VENDIDO;
-		Ingresso ingresso = new Ingresso(10, Status.NORMAL);
+		Ingresso ingresso = new Ingresso(10, TipoIngresso.NORMAL);
 		
 		assertEquals(statusEsperado, ingresso.getStatus());
 	}
@@ -51,7 +55,7 @@ class IngressoTest {
 	@Test
 	void testVendaDeIngresso() {
 		Status statusEsperado = Status.VENDIDO;
-		Ingresso ingresso = new Ingresso(10, Status.NORMAL);
+		Ingresso ingresso = new Ingresso(10, TipoIngresso.NORMAL);
 		ingresso.setStatus(Status.VENDIDO);
 		
 		assertEquals(statusEsperado, ingresso.getStatus());
@@ -61,7 +65,7 @@ class IngressoTest {
 	void testVendeIngressoDuasVezes() {
 		try {
 			Status statusEsperado = Status.VENDIDO;
-			Ingresso ingresso = new Ingresso(10, Status.NORMAL);
+			Ingresso ingresso = new Ingresso(10, TipoIngresso.NORMAL);
 			ingresso.setStatus(Status.VENDIDO);
 			ingresso.setStatus(Status.VENDIDO);
 		}catch(IllegalArgumentException e){
