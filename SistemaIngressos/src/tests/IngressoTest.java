@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class TarefaTest {
+class IngressoTest {
 
 	@Test
 	void testCriarIngressoValido() {
@@ -27,7 +27,7 @@ class TarefaTest {
 	@Test
 	void testGetPrecoIngressoVIP() {
 		double  precoBase = 10;
-		double  precoEsperado = 15;
+		double  precoEsperado = 20;
 		Ingresso ingresso = new Ingresso(precoBase, Status.VIP);
 		assertEquals(precoEsperado, ingresso.getPreco());
 	}
