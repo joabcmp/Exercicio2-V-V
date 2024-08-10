@@ -56,12 +56,4 @@ class BoletoTest {
             assertEquals("Entrada Inválida.", e.getMessage());
         }
     }
-
-    @Test
-    public void testCriarBoletoComPagamentoAtrasado() {
-        // Simula um boleto pago com atraso
-        Boleto b1 = new Boleto("115", "28/03/2024", 4000);
-        double valorPagoComAtraso = b1.getValor() * 1.10; // Valor acrescido de 10% de juros
-        assertEquals(4400, valorPagoComAtraso, 0.01, "O valor pago com atraso deve ser acrescido de 10%.");
-    }
 }

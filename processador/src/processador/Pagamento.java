@@ -1,18 +1,18 @@
 package processador;
+
 public class Pagamento {
     private double valorPago;
     private String data;
     private String tipoPagamento;
 
     // Construtor
-    public Pagamento(double valorPago, String data) {
-    	if(data.isEmpty()){
-    		throw new IllegalArgumentException("Entrada Inválida.");
-    	}
+    public Pagamento(double valorPago, String data, String tipoPagamento) {
+        if (data.isEmpty()) {
+            throw new IllegalArgumentException("Entrada Inválida.");
+        }
         this.valorPago = valorPago;
         this.data = data;
-        this.tipoPagamento = "BOLETO";
-       
+        this.tipoPagamento = tipoPagamento;
     }
 
     public double getValorPago() {
@@ -34,6 +34,4 @@ public class Pagamento {
     public String getTipoPagamento() {
         return tipoPagamento;
     }
-
-
 }
