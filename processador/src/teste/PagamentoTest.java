@@ -47,13 +47,13 @@ class PagamentoTest {
     }
 
     @Test
-    public void testCriarPagamentoInvalidoComValorNegativo() {
+    public void testCriarPagamentoBoletoInvalidoComValorNegativo() {
         // Testar pagamento com valor negativo
         try {
             Pagamento pag = new Pagamento(-100, "28/03/2024", "BOLETO");
             fail("Deveria lançar exceção para valor de pagamento negativo.");
         } catch (IllegalArgumentException e) {
-            assertEquals("Entrada Inválida.", e.getMessage());
+            assertEquals("Valor do boleto fora do limite permitido.", e.getMessage());
         }
     }
 
@@ -61,7 +61,7 @@ class PagamentoTest {
     public void testCriarPagamentoInvalidoComDataInvalida() {
         // Testar pagamento com data inválida
         try {
-            Pagamento pag = new Pagamento(856, "", "CARTAO_CREDITO");
+            Pagamento pag = new Pagamento(8560, "", "CARTAO_CREDITO");
             fail("Deveria lançar exceção para data inválida.");
         } catch (IllegalArgumentException e) {
             assertEquals("Entrada Inválida.", e.getMessage());
@@ -72,10 +72,10 @@ class PagamentoTest {
     public void testCriarPagamentoInvalidoComValorForaDoLimiteSuperiorBoleto() {
         // Testar pagamento com valor superior ao permitido para boleto
         try {
-            Pagamento pag = new Pagamento(6001, "28/03/2024", "BOLETO");
+            Pagamento pag = new Pagamento(5001, "28/03/2024", "BOLETO");
             fail("Deveria lançar exceção para valor de boleto acima do máximo permitido.");
         } catch (IllegalArgumentException e) {
-            assertEquals("Entrada Inválida.", e.getMessage());
+            assertEquals("Valor do boleto fora do limite permitido.", e.getMessage());
         }
     }
 
@@ -86,7 +86,7 @@ class PagamentoTest {
             Pagamento pag = new Pagamento(0, "28/03/2024", "BOLETO");
             fail("Deveria lançar exceção para valor de boleto abaixo do mínimo permitido.");
         } catch (IllegalArgumentException e) {
-            assertEquals("Entrada Inválida.", e.getMessage());
+            assertEquals("Valor do boleto fora do limite permitido.", e.getMessage());
         }
     }
 
@@ -97,7 +97,7 @@ class PagamentoTest {
             Pagamento pag = new Pagamento(856, "28/03/2024", "CHEQUE");
             fail("Deveria lançar exceção para tipo de pagamento inválido.");
         } catch (IllegalArgumentException e) {
-            assertEquals("Entrada Inválida.", e.getMessage());
+            assertEquals("Tipo de pagamento Inválido.", e.getMessage());
         }
     }
 }
