@@ -1,6 +1,7 @@
 package sistema;
 
 public class Ingresso {
+	private static int ultimoId = 0;
     private int id;
     private TipoIngresso tipo;
     private Status status;
@@ -10,6 +11,7 @@ public class Ingresso {
         if (precoBase <= 0) {
             throw new IllegalArgumentException("Entrada inválida");
         }
+        this.id = ++ultimoId;
         this.preco = precoBase;
         this.tipo = tipo;
         this.status = Status.NAO_VENDIDO;
@@ -73,6 +75,10 @@ public class Ingresso {
 		if (tipo != other.tipo)
 			return false;
 		return true;
+	}
+
+	public int getId() {
+		return id;
 	}
 }
 

@@ -14,7 +14,7 @@ public class Show {
 
     public Show(String data, String artista, double cache, double despesasInfra, boolean dataEspecial, double porcentagemVIP) {
         if (porcentagemVIP < 0.2 || porcentagemVIP > 0.3) {
-            throw new IllegalArgumentException("Porcentagem maxima de ingressos VIP excedida");
+            throw new IllegalArgumentException("Porcentagem de ingressos VIP excedida");
         }
         this.data = data;
         this.artista = artista;
@@ -28,13 +28,43 @@ public class Show {
     public int createLote(int numIngressos, double desconto, double precoBase) {
         Lote lote = new Lote(numIngressos, desconto, porcentagemVIP, precoBase);
         lotes.add(lote);
-        return lotes.size() - 1;
+        return lote.getId();
     }
 
     public double comprarLotePorId(int id) {
         Lote lote = lotes.get(id);
         lote.compraIngressos();
         return lote.getReceita();
+    }
+    
+    public double comprIngressoNORMAL() {
+    	double saida;
+    	for (Lote lote : lotes) {
+    		saida = lote.comprIngressoNORMAL();
+    		if (saida != -1) 
+    			return saida;
+    	}
+    	throw new IllegalArgumentException("Sem ingressos disponíveis");
+    }
+    
+    public double comprIngressoVIP() {
+    	double saida;
+    	for (Lote lote : lotes) {
+    		saida = lote.comprIngressoVIP();
+    		if (saida != -1) 
+    			return saida;
+    	}
+    	throw new IllegalArgumentException("Sem ingressos disponíveis");
+    }
+    
+    public double comprIngressoMEIA() {
+    	double saida;
+    	for (Lote lote : lotes) {
+    		saida = lote.comprIngressoMEIA();
+    		if (saida != -1) 
+    			return saida;
+    	}
+    	throw new IllegalArgumentException("Sem ingressos disponíveis");
     }
 
     public String gerarRelatorio() {
@@ -76,4 +106,12 @@ public class Show {
             numNormaisVendidos, numVipVendidos, numMeiaVendidos, receitaLiquida, custoTotal, statusFinanceiro
         );
     }
+
+	public double getPorcentagemVIP() {
+		return porcentagemVIP;
+	}
+
+	public void setPorcentagemVIP(double porcentagemVIP) {
+		this.porcentagemVIP = porcentagemVIP;
+	}
 }
