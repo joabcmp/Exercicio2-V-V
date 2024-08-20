@@ -112,7 +112,7 @@ class AvlTest {
     void testErro_25_negativo() {
         try {
         	show.setPorcentagemVIP(0.25);
-            show.createLote(155, -1, 10);
+            show.createLote(155, -0.01, 10);
             fail("Esperado erro por exceder porcentagem VIP");
         } catch (IllegalArgumentException e) {
             assertEquals("Porcentagem de desconto limite excedida", e.getMessage());
