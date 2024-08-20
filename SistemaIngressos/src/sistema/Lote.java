@@ -43,20 +43,34 @@ public class Lote {
         return this.ingressos;
     }
     
-    public double comprIngressoByID(int id) {
-    	double saida = -1;
+    public double comprIngressoNORMAL() {
     	for (Ingresso ingresso : ingressos) {
-        	if (ingresso.getId() == id) {
+        	if (ingresso.getTipo() == TipoIngresso.NORMAL && ingresso.getStatus() != Status.VENDIDO) {
         		ingresso.setStatus(Status.VENDIDO);
-        		
-        		if (ingresso.getTipo() == TipoIngresso.MEIA_ENTRADA) 
-        			saida = ingresso.getPreco();
-                else 
-                	saida = ingresso.getPreco() * (1 - this.desconto);
-        		break;
+        		return ingresso.getPreco() * (1 - this.desconto);
     		}
         }
-    	return saida;
+    	return -1;
+    }
+    
+    public double comprIngressoVIP() {
+    	for (Ingresso ingresso : ingressos) {
+        	if (ingresso.getTipo() == TipoIngresso.VIP && ingresso.getStatus() != Status.VENDIDO) {
+        		ingresso.setStatus(Status.VENDIDO);
+        		return ingresso.getPreco() * (1 - this.desconto);
+    		}
+        }
+    	return -1;
+    }
+    
+    public double comprIngressoMEIA() {
+    	for (Ingresso ingresso : ingressos) {
+        	if (ingresso.getTipo() == TipoIngresso.MEIA_ENTRADA && ingresso.getStatus() != Status.VENDIDO) {
+        		ingresso.setStatus(Status.VENDIDO);
+        		return ingresso.getPreco();
+    		}
+        }
+    	return -1;
     }
 
     public void compraIngressos() {

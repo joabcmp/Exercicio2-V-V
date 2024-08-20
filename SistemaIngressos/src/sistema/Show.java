@@ -36,6 +36,36 @@ public class Show {
         lote.compraIngressos();
         return lote.getReceita();
     }
+    
+    public double comprIngressoNORMAL() {
+    	double saida;
+    	for (Lote lote : lotes) {
+    		saida = lote.comprIngressoNORMAL();
+    		if (saida != -1) 
+    			return saida;
+    	}
+    	throw new IllegalArgumentException("Sem ingressos disponíveis");
+    }
+    
+    public double comprIngressoVIP() {
+    	double saida;
+    	for (Lote lote : lotes) {
+    		saida = lote.comprIngressoVIP();
+    		if (saida != -1) 
+    			return saida;
+    	}
+    	throw new IllegalArgumentException("Sem ingressos disponíveis");
+    }
+    
+    public double comprIngressoMEIA() {
+    	double saida;
+    	for (Lote lote : lotes) {
+    		saida = lote.comprIngressoMEIA();
+    		if (saida != -1) 
+    			return saida;
+    	}
+    	throw new IllegalArgumentException("Sem ingressos disponíveis");
+    }
 
     public String gerarRelatorio() {
         int numNormaisVendidos = 0;
