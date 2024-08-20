@@ -1,39 +1,37 @@
 package processador;
+
 public class Pagamento {
     private double valorPago;
     private String data;
     private String tipoPagamento;
 
-    // Construtor
-    public Pagamento(double valorPago, String data) {
-    	if(data.isEmpty()){
-    		throw new IllegalArgumentException("Entrada Inválida.");
-    	}
+    public Pagamento(double valorPago, String data, String tipoPagamento) {
+        if (data == null || data.isEmpty()) {
+            throw new IllegalArgumentException("Entrada Inválida.");
+        }
+        tipoPagamento = tipoPagamento.toUpperCase(); 
+        if (!tipoPagamento.equals("BOLETO") && !tipoPagamento.equals("CARTAO") && !tipoPagamento.equals("TRANSFERENCIA")) {
+            throw new IllegalArgumentException("Tipo de pagamento Inválido.");
+        }
+        if (tipoPagamento.equals("BOLETO") && (valorPago < 0.01 || valorPago > 5000.00)) {
+            throw new IllegalArgumentException("Valor do boleto fora do limite permitido.");
+        }
+
         this.valorPago = valorPago;
         this.data = data;
-        this.tipoPagamento = "BOLETO";
-       
+        this.tipoPagamento = tipoPagamento.toUpperCase();
     }
 
     public double getValorPago() {
         return valorPago;
     }
 
-    public void setValorPago(double valorPago) {
-        this.valorPago = valorPago;
-    }
-
     public String getData() {
         return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
     }
 
     public String getTipoPagamento() {
         return tipoPagamento;
     }
-
-
+    
 }

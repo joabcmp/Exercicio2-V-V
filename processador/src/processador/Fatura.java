@@ -6,20 +6,18 @@ import java.util.List;
 public class Fatura {
     
     private double valorTotal;
-    private String nomeCliente;
-	private String data;
-	private List<Pagamento> pagamentos;
-	private String estado;
+    private String data;
+    private String estado;
+    private List<Pagamento> pagamentos;
 
-    public Fatura(String data, double valorTotal, String nomeCliente) {
-        if (data == null || data.isEmpty() || valorTotal <= 0 || nomeCliente == null || nomeCliente.isEmpty()) {
-    		throw new IllegalArgumentException("Entrada Inválida.");
-    	}
+    public Fatura(String data, double valorTotal) {
+        if (data == null || data.isEmpty() || valorTotal <= 0) {
+            throw new IllegalArgumentException("Entrada Inválida.");
+        }
         this.data = data;
         this.valorTotal = valorTotal;
-        this.nomeCliente = nomeCliente;
         this.estado = "PENDENTE";
-        this.pagamentos = new ArrayList<Pagamento>();
+        this.pagamentos = new ArrayList<>();
     }
 
     public String getData() {
@@ -30,20 +28,30 @@ public class Fatura {
         return valorTotal;
     }
 
-    public String getNomeCliente() {
-        return nomeCliente;
+    public String getEstado() {
+        return estado;
+    }
+
+    public void adicionarPagamento(Pagamento pagamento) {
+        this.pagamentos.add(pagamento);
+    }
+
+    public double calcularTotalPago() {
+        double resposta = pagamentos.stream().mapToDouble(Pagamento::getValorPago).sum();
+        atualizarEstado();
+        return resposta;
+    }
+
+    public void atualizarEstado() {
+        double totalPago = calcularTotalPago();
+        if (totalPago >= valorTotal) {
+            this.estado = "PAGA";
+        } else {
+            this.estado = "PENDENTE";
+        }
     }
     
-    public void adicionarPagamento(Pagamento pagamento) {
-        pagamentos.add(pagamento);
+    public void aplicarAtraso() {
+        this.valorTotal *= 1.10; // Aplica acréscimo de 10% por atraso
     }
-	
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-	public String getEstado() {
-		return this.estado;
-	}
-
 }
