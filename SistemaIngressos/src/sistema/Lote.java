@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lote {
+	private static int ultimoId = 0;
     private int id;
     private List<Ingresso> ingressos;
     private double desconto;
@@ -13,12 +14,13 @@ public class Lote {
             throw new IllegalArgumentException("Numero de ingressos vazio");
         }
         if (porcentagemVIP < 0.2 || porcentagemVIP > 0.3) {
-            throw new IllegalArgumentException("Porcentagem maxima de ingressos VIP excedida");
+            throw new IllegalArgumentException("Porcentagem de ingressos VIP excedida");
         }
         if (desconto < 0 || desconto > 0.25) {
             throw new IllegalArgumentException("Porcentagem de desconto limite excedida");
         }
-
+        
+        this.id = ++ultimoId;
         this.ingressos = new ArrayList<>();
         this.desconto = desconto;
 
@@ -40,10 +42,27 @@ public class Lote {
     public List<Ingresso> getIngressos() {
         return this.ingressos;
     }
+    
+    public double comprIngressoByID(int id) {
+    	double saida = -1;
+    	for (Ingresso ingresso : ingressos) {
+        	if (ingresso.getId() == id) {
+        		ingresso.setStatus(Status.VENDIDO);
+        		
+        		if (ingresso.getTipo() == TipoIngresso.MEIA_ENTRADA) 
+        			saida = ingresso.getPreco();
+                else 
+                	saida = ingresso.getPreco() * (1 - this.desconto);
+        		break;
+    		}
+        }
+    	return saida;
+    }
 
     public void compraIngressos() {
         for (Ingresso ingresso : ingressos) {
-            ingresso.setStatus(Status.VENDIDO);
+        	if (ingresso.getStatus() != Status.VENDIDO) 
+        		ingresso.setStatus(Status.VENDIDO);
         }
     }
 
@@ -88,4 +107,8 @@ public class Lote {
         return receita;
 
     }
+
+	public int getId() {
+		return id;
+	}
 }
